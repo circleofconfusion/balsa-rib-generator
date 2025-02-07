@@ -18,22 +18,19 @@ class AirfoilBuilderListener(AirfoilListener):
         self.airfoil.add_point(point)
 
 
-filename = '/home/shane/RC Vehicles/BalsaRibGenerator/datparser/airfoils/eppler331.dat'
-airfoil_filestream = FileStream(filename)
-lexer = AirfoilLexer(airfoil_filestream)
-stream = CommonTokenStream(lexer)
-parser = AirfoilParser(stream)
-airfoil_builder_listener = AirfoilBuilderListener()
+class DatParser:
 
+    def parse_airfoil_file(self, filename):
+        filename = filename
+        airfoil_filestream = FileStream(filename)
+        lexer = AirfoilLexer(airfoil_filestream)
+        stream = CommonTokenStream(lexer)
+        parser = AirfoilParser(stream)
+        airfoil_builder_listener = AirfoilBuilderListener()
 
-tree = parser.airfoil();
+        tree = parser.airfoil();
+        walker = ParseTreeWalker();
 
-walker = ParseTreeWalker();
+        walker.walk(airfoil_builder_listener, tree)
 
-walker.walk(airfoil_builder_listener, tree)
-
-airfoil = airfoil_builder_listener.airfoil
-
-print(airfoil.get_xs())
-print(airfoil.get_ys())
-print(list(map(str, airfoil.points)))
+        return airfoil_builder_listener.airfoil
