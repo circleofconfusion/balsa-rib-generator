@@ -7,6 +7,9 @@ class Point:
         self.x = x
         self.y = y
 
+    def __str__(self):
+        return f"Point({self.x}, {self.y})"
+
 
 def get_x(point: Point):
     return point.x
@@ -16,14 +19,14 @@ def get_y(point: Point):
 
 
 class Airfoil:
-    name: str
-    points: list[Point]
+    name: str = ""
+    points: list[Point] = []
 
     def add_point(self, point: Point):
         self.points.append(point)
 
-    def get_xs(self):
-        return map(get_x, self.points)
+    def get_xs(self) -> list[float]:
+        return list(map(get_x, self.points))
     
-    def get_ys(self):
-        return map(get_y, self.points)
+    def get_ys(self) -> list[float]:
+        return list(map(get_y, self.points))

@@ -85,12 +85,6 @@ class AirfoilParser ( Parser ):
             if hasattr( listener, "exitAirfoil" ):
                 listener.exitAirfoil(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAirfoil" ):
-                return visitor.visitAirfoil(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -136,12 +130,6 @@ class AirfoilParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitName" ):
                 listener.exitName(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitName" ):
-                return visitor.visitName(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -198,12 +186,6 @@ class AirfoilParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitPoints" ):
                 listener.exitPoints(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPoints" ):
-                return visitor.visitPoints(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 
@@ -262,12 +244,6 @@ class AirfoilParser ( Parser ):
             if hasattr( listener, "exitPoint" ):
                 listener.exitPoint(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPoint" ):
-                return visitor.visitPoint(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -311,12 +287,6 @@ class AirfoilParser ( Parser ):
             if hasattr( listener, "exitX" ):
                 listener.exitX(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitX" ):
-                return visitor.visitX(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
@@ -357,12 +327,6 @@ class AirfoilParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitY" ):
                 listener.exitY(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitY" ):
-                return visitor.visitY(self)
-            else:
-                return visitor.visitChildren(self)
 
 
 

@@ -7,7 +7,6 @@ points : point+ ;
 point : x y ;
 x : FLOAT ;
 y : FLOAT ;
-NAME : [0-9a-zA-Z]+ AIRFOIL? ;
+NAME : [0-9a-zA-Z]+ ;
 FLOAT : [-]?[0-1]'.'[0-9]+ ;
-AIRFOIL : 'AIRFOIL'{1} -> skip;
 WS : [ \t\r\n]+ -> skip;
