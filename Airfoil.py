@@ -9,6 +9,9 @@ class Point:
 
     def __str__(self):
         return f"Point({self.x}, {self.y})"
+    
+    def __eq__(self, point):
+        return self.x == point.x and self.y == point.y
 
 
 class Airfoil:
@@ -29,3 +32,12 @@ class Airfoil:
         for p in self.points:
             scaled_ys.append(p.y * chord)
         return scaled_ys
+    
+    def get_scaled_points(self, chord_mm: int):
+        scaled_points = []
+        for p in self.points:
+            scaled_point = Point(p.x * chord_mm, p.y * chord_mm)
+            if (len(scaled_points) == 0 or scaled_point != scaled_points[-1]):
+                scaled_points.append(scaled_point)
+        
+        return scaled_points
