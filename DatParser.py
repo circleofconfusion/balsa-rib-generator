@@ -2,7 +2,7 @@ from antlr4 import *
 from AirfoilLexer import AirfoilLexer
 from AirfoilParser import AirfoilParser
 from AirfoilListener import AirfoilListener
-from Airfoil import Airfoil, Point
+from Airfoil import Airfoil
 
 class AirfoilBuilderListener(AirfoilListener):
     airfoil: Airfoil
@@ -14,7 +14,9 @@ class AirfoilBuilderListener(AirfoilListener):
         self.airfoil.name = " ".join(map(str, ctx.NAME()))
 
     def exitPoint(self, ctx):
-        point = Point(float(ctx.x().getText()), float(ctx.y().getText()))
+        x = float(ctx.x().getText())
+        y = float(ctx.y().getText())
+        point = (x, y)
         self.airfoil.add_point(point)
 
 

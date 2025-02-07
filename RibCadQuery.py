@@ -1,26 +1,24 @@
 from DatParser import DatParser
 from cadquery import *
-from cadquery.vis import show
-from Airfoil import Point
-
-def pointToTuple(point: Point):
-    return (point.x, point.y);
 
 
 def main():
     dat_parser = DatParser()
-    airfoil = dat_parser.parse_airfoil_file("airfoils/clarkz.DAT")
+    root_airfoil = dat_parser.parse_airfoil_file("airfoils/clarky.DAT")
+    tip_airfoil = dat_parser.parse_airfoil_file("airfoils/clarkz.DAT")
 
-    chord_mm = 150
-    points = list(map(pointToTuple, airfoil.get_scaled_points(chord_mm)))
+    root_chord = 150
+    tip_chord = 100
+    half_wingspan = 750
+    root_points = root_airfoil.get_scaled_points(root_chord)
+    tip_points = tip_airfoil.get_scaled_points(tip_chord)
 
-    result = Workplane("XY").polyline(points)
+    result = Workplane("front").polyline(root_points).close() \
+        .workplane(offset=half_wingspan).polyline(tip_points).close().loft(combine=True,ruled=True) \
+        .faces(">Z").workplane(-half_wingspan/2).split(keepBottom=True, keepTop=True)
 
 
-    result = result.close()
-
-    # show(result, edges=True)
-    result.export("rib.svg", opt={"projectionDir":[0,0,1], "marginLeft":10, "width":170, "height":50})
+    result.export("rib.dxf")
 
 if __name__ == '__main__':
     main()
