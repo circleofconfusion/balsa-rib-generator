@@ -16,8 +16,8 @@ def main():
     root_points = root_airfoil.get_scaled_points(root_chord)
     tip_points = tip_airfoil.get_scaled_points(tip_chord)
 
-    wing = Workplane("front").polyline(root_points) \
-        .workplane(offset=half_wingspan).polyline(tip_points).loft(combine=True, ruled=True)
+    wing = Workplane("front").polyline(root_points).close() \
+        .workplane(offset=half_wingspan).polyline(tip_points).close().loft(combine=True, ruled=True)
 
     bays = Workplane("XY").workplane(offset=rib_thickness).box(root_chord, 100, rib_spacing, centered=False) 
 
@@ -27,8 +27,8 @@ def main():
     bays = bays.translate((0,-50,0))
     wing = wing.cut(bays)
     
-    wing.export("rib.svg", opt={"strokeWidth":0.01, "projectionDir":[0,0,1], "strokeColor":(255,255,255), "marginLeft":50})
-    # wing.export("rib.svg", opt={"strokeWidth":0.1, "strokeColor":(255,255,255), "marginLeft":50})
+    # wing.export("rib.svg", opt={"strokeWidth":0.01, "projectionDir":[0,0,1], "strokeColor":(255,255,255), "marginLeft":50})
+    wing.export("rib.svg", opt={"strokeWidth":0.1, "strokeColor":(255,255,255), "marginLeft":50})
 
 if __name__ == '__main__':
     main()

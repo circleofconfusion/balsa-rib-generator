@@ -22,7 +22,7 @@ class AirfoilBuilderListener(AirfoilListener):
 
 class DatParser:
 
-    def parse_airfoil_file(self, filename):
+    def parse_airfoil_file(self, filename: str) -> Airfoil:
         filename = filename
         airfoil_filestream = FileStream(filename)
         lexer = AirfoilLexer(airfoil_filestream)
