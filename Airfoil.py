@@ -1,6 +1,10 @@
 class Airfoil:
-    name: str = ""
-    points: list[tuple[float,float]] = []
+    name: str
+    points: list[tuple[float,float]]
+
+    def __init__(self):
+        self.name = ""
+        self.points = []
 
     def add_point(self, point: tuple[float,float]):
         self.points.append(point)

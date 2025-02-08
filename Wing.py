@@ -18,18 +18,12 @@ def main():
     tip_points = tip_airfoil.get_scaled_points(tip_chord)
 
     wing = Workplane("front").polyline(root_points).close() \
-        .workplane(offset=half_wingspan).polyline(tip_points).close().loft(combine=True, ruled=True)
+        .workplane(offset=half_wingspan).polyline(tip_points).close() \
+        .loft()
 
-    bays = Workplane("XY").workplane(offset=rib_thickness).box(root_chord, 100, rib_spacing, centered=False) 
 
-    for i in (range(1,num_rib_bays)):
-        bays = bays.faces(">Z").workplane(offset=rib_thickness).box(root_chord, 100, rib_spacing, centered=False)
-        
-    bays = bays.translate((0,-50,0))
-    wing = wing.cut(bays)
-    
-    # wing.export("rib.svg", opt={"strokeWidth":0.01, "projectionDir":[0,0,1], "strokeColor":(255,255,255), "marginLeft":50})
-    wing.export("output/rib.svg", opt={"strokeWidth":0.1, "strokeColor":(255,255,255), "marginLeft":50})
+    # wing.export("output/profiles.svg", opt={"projectionDir":[0,0,1], "strokeWidth":0.1, "strokeColor":(255,255,255), "marginLeft":50})
+    wing.export("output/profiles.svg", opt={"strokeWidth":0.1, "strokeColor":(255,255,255), "marginLeft":50})
 
 if __name__ == '__main__':
     main()
