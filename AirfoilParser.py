@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,4,33,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,1,0,1,0,
+        4,1,3,33,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,1,0,1,0,
         1,0,1,1,4,1,17,8,1,11,1,12,1,18,1,2,4,2,22,8,2,11,2,12,2,23,1,3,
         1,3,1,3,1,4,1,4,1,5,1,5,1,5,0,0,6,0,2,4,6,8,10,0,0,28,0,12,1,0,0,
         0,2,16,1,0,0,0,4,21,1,0,0,0,6,25,1,0,0,0,8,28,1,0,0,0,10,30,1,0,
@@ -33,7 +33,7 @@ class AirfoilParser ( Parser ):
 
     literalNames = [  ]
 
-    symbolicNames = [ "<INVALID>", "NAME", "FLOAT", "AIRFOIL", "WS" ]
+    symbolicNames = [ "<INVALID>", "NAME", "FLOAT", "WS" ]
 
     RULE_airfoil = 0
     RULE_name = 1
@@ -47,8 +47,7 @@ class AirfoilParser ( Parser ):
     EOF = Token.EOF
     NAME=1
     FLOAT=2
-    AIRFOIL=3
-    WS=4
+    WS=3
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
