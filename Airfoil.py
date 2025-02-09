@@ -9,7 +9,7 @@ class Airfoil:
     def add_point(self, point: tuple[float,float]):
         self.points.append(point)
     
-    def get_scaled_points(self, chord_mm: float):
+    def get_scaled_points(self, chord_mm: float) -> list[tuple[float,float]]:
         scaled_points = []
         for p in self.points:
             scaled_point = (p[0] * chord_mm, p[1] * chord_mm)
