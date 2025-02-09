@@ -1,8 +1,13 @@
 from DatParser import DatParser
 from cadquery import *
 
+# Didn't do anything useful that I know of
+# def translate_solid(s):
+#     s.translate((0,20,0))
+#     return s
 
 def main():
+
     root_parser = DatParser()
     tip_parser = DatParser()
     root_airfoil = root_parser.parse_airfoil_file("airfoils/prandtl_root.DAT")
@@ -27,6 +32,9 @@ def main():
         
     bays = bays.translate((0,-50,0))
     wing = wing.cut(bays)
+    # Ran forever and didn't work.
+    # wing = wing.solids().each(callback=translate_solid)
+
     
     wing.export("output/rib.svg", opt={"strokeWidth":0.01, "projectionDir":[0,0,1], "strokeColor":(255,255,255), "marginLeft":50})
     # wing.export("output/rib.svg", opt={"strokeWidth":0.1, "strokeColor":(255,255,255), "marginLeft":50})
